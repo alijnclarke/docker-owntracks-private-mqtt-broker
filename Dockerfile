@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-MAINTAINER Philipp Adelt <autosort-github@philipp.adelt.net>
+MAINTAINER Ali Clarke <ali.clarke@yellowdog.io>
 
 # Everthing for the MQTT Broker "mosquitto"
 ADD files/mosquitto-jessie.list /etc/apt/sources.list.d/mosquitto-jessie.list
@@ -45,11 +45,6 @@ COPY files/listen-mqtt.sh /listen-mqtt.sh
 COPY files/supervisord.conf /etc/supervisord.conf
 COPY files/pista-inject-users.sh /tmp/pista-inject-users.sh
 RUN chmod +x /*.sh /tmp/*.sh
-
-# Install mqttwarn with enough to fill a Google Docs Table
-RUN git clone https://github.com/jpmens/mqttwarn.git /opt/mqttwarn
-RUN pip install gspread && pip install google-api-python-client
-COPY files/mqttwarn.ini.default /tmp/mqttwarn.ini.default
 
 VOLUME ["/volume"]
 
